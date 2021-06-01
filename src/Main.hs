@@ -3,8 +3,9 @@ module Main where
 main :: IO ()
 main = undefined
 
-newtype Switchs = Switchs {
-   matchString :: Maybe String -- This should have a space in it, this is not checked
+data Switchs = Switchs {
+    matchString :: Maybe String -- This should have a space in it, this is not checked
+  , random :: Bool -- Shuffle the first/last name lists, currently does nothing
 }
 
 -- First/Last names should be the file string, word splits will be added.
@@ -19,3 +20,6 @@ namegener fns lns sws =
   case matchString sws of
     Just s -> undefined
     Nothing -> undefined
+
+splitNameLists :: String -> Bool -> [String]
+splitNameLists = undefined
