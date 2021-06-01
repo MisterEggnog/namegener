@@ -27,3 +27,8 @@ splitNameLists ::
   [String]
 splitNameLists s r = splitString
   where splitString = words s
+
+-- first names -> last names
+mergeStrings :: [String] -> [String] -> [String]
+mergeStrings fns lns = nameM <$> fns <*> lns
+  where nameM = \fn ln -> fn ++ " " ++ ln
