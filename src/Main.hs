@@ -15,4 +15,7 @@ namegener ::
   String ->  -- Last names
   Switchs -> -- Command switchs
   [String]
-namegener = undefined
+namegener fns lns sws =
+  case mathString sws of
+    Just s -> undefined
+    Nothing -> undefined
