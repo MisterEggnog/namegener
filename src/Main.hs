@@ -21,5 +21,8 @@ namegener fns lns sws =
     Just s -> undefined
     Nothing -> undefined
 
-splitNameLists :: String -> Bool -> [String]
+splitNameLists ::
+  String -> -- The unsplit string
+  Bool ->   -- If the returned string should be shuffled, current does nothing
+  [String]
 splitNameLists = undefined
