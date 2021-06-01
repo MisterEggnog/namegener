@@ -4,7 +4,7 @@ main :: IO ()
 main = undefined
 
 newtype Switchs = Switchs {
-   matchString :: Option String -- This should have a space in it, this is not checked
+   matchString :: Maybe String -- This should have a space in it, this is not checked
 }
 
 -- First/Last names should be the file string, word splits will be added.
@@ -16,6 +16,6 @@ namegener ::
   Switchs -> -- Command switchs
   [String]
 namegener fns lns sws =
-  case mathString sws of
+  case matchString sws of
     Just s -> undefined
     Nothing -> undefined
