@@ -25,4 +25,5 @@ splitNameLists ::
   String -> -- The unsplit string
   Bool ->   -- If the returned string should be shuffled, current does nothing
   [String]
-splitNameLists = undefined
+splitNameLists s r = splitString
+  where splitString = words s
