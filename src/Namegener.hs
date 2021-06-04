@@ -1,7 +1,7 @@
-module Main where
+module Namegener where
 
-main :: IO ()
-main = undefined
+main' :: IO ()
+main' = undefined
 
 data Switchs = Switchs {
     matchString :: Maybe String -- This should have a space in it, this is not checked

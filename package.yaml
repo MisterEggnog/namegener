@@ -28,7 +28,8 @@ library:
 
 executables:
   namegener-exe:
-    source-dirs:         src
+    main:                Main.hs
+    source-dirs:         app
     ghc-options:
     - -threaded
     - -rtsopts
