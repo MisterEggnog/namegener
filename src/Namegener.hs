@@ -1,5 +1,7 @@
 module Namegener where
 
+import Data.Sort
+
 main' :: IO ()
 main' = undefined
 
@@ -18,8 +20,11 @@ namegener ::
   [String]
 namegener fns lns sws =
   case matchString sws of
-    Just s -> undefined
-    Nothing -> undefined
+    Just s -> filter (\r -> sort r == sort s) names
+    Nothing -> names
+  where lns' = splitNameLists (random sws) lns
+        fns' = splitNameLists (random sws) fns
+        names = mergeStrings fns' lns'
 
 splitNameLists ::
   Bool ->   -- If the returned string should be shuffled, current does nothing
