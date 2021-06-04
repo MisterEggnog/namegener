@@ -22,10 +22,10 @@ namegener fns lns sws =
     Nothing -> undefined
 
 splitNameLists ::
-  String -> -- The unsplit string
   Bool ->   -- If the returned string should be shuffled, current does nothing
+  String -> -- The unsplit string
   [String]
-splitNameLists s r = splitString
+splitNameLists r s = splitString
   where splitString = words s
 
 -- first names -> last names
