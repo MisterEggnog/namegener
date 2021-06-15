@@ -1,4 +1,4 @@
-module Namegener where
+module Ananamer where
 
 import Data.Sort
 

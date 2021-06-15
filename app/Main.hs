@@ -1,7 +1,7 @@
 module Main where
 
-import Namegener
+import Ananamer
 
 main :: IO ()
-main = Namegener.main'
+main = Ananamer.main'
 

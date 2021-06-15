@@ -1,4 +1,4 @@
-name:                namegener
+name:                ananamer
 version:             0.1.0.0
 github:              "githubuser/namegener"
 license:             OtherLicense
@@ -28,7 +28,7 @@ library:
   source-dirs: src
 
 executables:
-  namegener-exe:
+  ananamer-exe:
     main:                Main.hs
     source-dirs:         app
     ghc-options:
@@ -36,10 +36,10 @@ executables:
     - -rtsopts
     - -with-rtsopts=-N
     dependencies:
-    - namegener
+    - ananamer
 
 tests:
-  namegener-test:
+  ananamer-test:
     main:                Spec.hs
     source-dirs:         test
     ghc-options:
@@ -47,4 +47,4 @@ tests:
     - -rtsopts
     - -with-rtsopts=-N
     dependencies:
-    - namegener
+    - ananamer
