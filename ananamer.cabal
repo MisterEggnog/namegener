@@ -58,7 +58,8 @@ test-suite ananamer-test
       test
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
-      ananamer
+      HUnit
+    , ananamer
     , base >=4.7 && <5
     , random
     , sort
