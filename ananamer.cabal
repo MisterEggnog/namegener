@@ -32,6 +32,7 @@ library
   build-depends:
       base >=4.7 && <5
     , random
+    , random-shuffle
     , sort
   default-language: Haskell2010
 
@@ -46,6 +47,7 @@ executable ananamer-exe
       ananamer
     , base >=4.7 && <5
     , random
+    , random-shuffle
     , sort
   default-language: Haskell2010
 
@@ -63,5 +65,6 @@ test-suite ananamer-test
     , base >=4.7 && <5
     , containers
     , random
+    , random-shuffle
     , sort
   default-language: Haskell2010
