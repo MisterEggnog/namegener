@@ -34,6 +34,7 @@ library
     , random
     , random-shuffle
     , sort
+    , split
   default-language: Haskell2010
 
 executable ananamer-exe
@@ -49,6 +50,7 @@ executable ananamer-exe
     , random
     , random-shuffle
     , sort
+    , split
   default-language: Haskell2010
 
 test-suite ananamer-test
@@ -67,4 +69,5 @@ test-suite ananamer-test
     , random
     , random-shuffle
     , sort
+    , split
   default-language: Haskell2010

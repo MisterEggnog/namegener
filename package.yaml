@@ -24,6 +24,7 @@ dependencies:
 - random
 - random-shuffle
 - sort
+- split
 
 library:
   source-dirs: src

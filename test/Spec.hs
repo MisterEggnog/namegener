@@ -11,6 +11,7 @@ tests = TestList
   , TestLabel "splitNames splits" splitNamesSplits
   , TestLabel "namegener works in simple sitution" namegenerMatchesExp
   , TestLabel "namegener follows anagram" namegenerSameCharacters 
+  , TestLabel "namegener supports words that have spaces in them" namegenerStringsSupportsSpaces
   ]
 
 mergeStringsTest = TestCase (assertEqual "Merge string produces all possible merges" expected given)
@@ -39,3 +40,9 @@ namegenerSameCharacters = TestCase (assertEqual "When given a name, namegener wi
   where expected = ["Dink Dinkson"]
         given    = genericNamegener $
           Switchs { matchString = Just "Dink Dinkson", random = False }
+
+namegenerStringsSupportsSpaces = TestCase (assertEqual "Merge string support names with spaces" expected given)
+  where expected = ["San Bo Det"]
+        given = namegener "San Bo" "Det" $
+          Switchs { matchString = Just "San Bo Det", random = False }
+

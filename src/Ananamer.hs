@@ -1,6 +1,7 @@
 module Ananamer where
 
 import Data.Sort
+import Data.List.Split
 
 main' :: IO ()
 main' = undefined
@@ -20,18 +21,19 @@ namegener ::
   [String]
 namegener fns lns sws =
   case matchString sws of
-    Just s -> filter (\r -> sort r == sort s) names
+    Just s -> filter (\r -> prepS r == prepS s) names
     Nothing -> names
-  where lns' = splitNameLists (random sws) lns
-        fns' = splitNameLists (random sws) fns
-        names = mergeStrings fns' lns'
+  where lns'    = splitNameLists (random sws) lns
+        fns'    = splitNameLists (random sws) fns
+        names   = mergeStrings fns' lns'
+        prepS s = sort $ filter (/= ' ') s
 
 splitNameLists ::
   Bool ->   -- If the returned string should be shuffled, current does nothing
   String -> -- The unsplit string
   [String]
 splitNameLists r s = splitString
-  where splitString = words s
+  where splitString = filter (/= "") $ splitOn "\n" s
 
 -- first names -> last names
 mergeStrings :: [String] -> [String] -> [String]
