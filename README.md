@@ -9,3 +9,7 @@ names.csv is processed using
 ```bash
 awk -F ',' 'NR>4 { print $1 "\n" $4 }' < names.csv | tr '[:upper:]' '[:lower:]' | sed '/^$/d'
 ```
+
+## Future changes
+Change this to either query a public database or to have somekind of local
+database.
