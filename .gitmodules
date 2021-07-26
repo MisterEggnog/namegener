@@ -1,0 +1,3 @@
+[submodule "NameDatabases"]
+	path = NameDatabases
+	url = https://github.com/MisterEggnog/NameDatabases.git
