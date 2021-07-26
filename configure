@@ -1,0 +1,12 @@
+#!/bin/sh
+
+# No enviromental variable for the root of the haskell repo, so use this shim
+# to reach it.
+while [ ! -d .git ]; do
+	cd ..
+done
+
+if [ ! -f names.db ]; then
+	(cd ./NameDatabases/NamesDatabases/ && exec ./sqliteDB_gen.py)
+	mv ./NameDatabases/NamesDatabases/names.db .
+fi

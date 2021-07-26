@@ -5,6 +5,7 @@ license:             OtherLicense
 author:              "Author name here"
 maintainer:          "example@example.com"
 copyright:           "2021 Author name here"
+build-type: Configure
 
 extra-source-files:
 - README.md
