@@ -29,12 +29,15 @@ library
       Paths_ananamer
   hs-source-dirs:
       src
+  default-extensions:
+      OverloadedStrings
   build-depends:
       base >=4.7 && <5
     , random
     , random-shuffle
     , sort
     , split
+    , sqlite-simple
   default-language: Haskell2010
 
 executable ananamer-exe
@@ -43,6 +46,8 @@ executable ananamer-exe
       Paths_ananamer
   hs-source-dirs:
       app
+  default-extensions:
+      OverloadedStrings
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       ananamer
@@ -51,6 +56,7 @@ executable ananamer-exe
     , random-shuffle
     , sort
     , split
+    , sqlite-simple
   default-language: Haskell2010
 
 test-suite ananamer-test
@@ -60,6 +66,8 @@ test-suite ananamer-test
       Paths_ananamer
   hs-source-dirs:
       test
+  default-extensions:
+      OverloadedStrings
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       HUnit
@@ -70,4 +78,5 @@ test-suite ananamer-test
     , random-shuffle
     , sort
     , split
+    , sqlite-simple
   default-language: Haskell2010

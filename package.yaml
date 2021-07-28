@@ -26,6 +26,10 @@ dependencies:
 - random-shuffle
 - sort
 - split
+- sqlite-simple
+
+default-extensions:
+- OverloadedStrings
 
 library:
   source-dirs: src
