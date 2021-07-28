@@ -52,7 +52,7 @@ testLoadNames = TestCase $ do
   let firsts = ["Mark", "John", "Dink"] :: [String]
   let lasts = fmap (\s -> s ++ "son") firsts
   let expected = tupleApply fromList (firsts, lasts)
-  conn <- open ":memory"
+  conn <- open ":memory:"
   execute conn "CREATE TABLE first_names (name text)" ()
   execute conn "CREATE TABLE last_names (name text)" ()
   executeMany conn "INSERT INTO first_names (name) VALUES (?)" $ fmap Only firsts
