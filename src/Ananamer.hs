@@ -11,7 +11,12 @@ main' = undefined
 -- `last_name` tables.
 -- The tuple returned is (first names, last names).
 loadNames :: Connection -> IO ([String], [String])
-loadNames db = undefined
+loadNames db = do
+  first_names <- query_ db "SELECT name FROM first_names;" :: IO [Only String]
+  last_names <- query_ db "SELECT name FROM last_names;" :: IO [Only String]
+  let first_names' = map fromOnly first_names
+  let last_names' = map fromOnly last_names
+  pure (first_names', last_names')
 
 data Switchs = Switchs {
     matchString :: Maybe String -- This should have a space in it, this is not checked
