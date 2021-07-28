@@ -2,9 +2,16 @@ module Ananamer where
 
 import Data.Sort
 import Data.List.Split
+import Database.SQLite.Simple
 
 main' :: IO ()
 main' = undefined
+
+-- From the passed in database, read the names from the `first_name` &
+-- `last_name` tables.
+-- The tuple returned is (first names, last names).
+loadNames :: Connection -> IO ([String], [String])
+loadNames db = undefined
 
 data Switchs = Switchs {
     matchString :: Maybe String -- This should have a space in it, this is not checked

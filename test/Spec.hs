@@ -2,6 +2,7 @@
 import Data.Set (Set, fromList)
 import Ananamer
 import Test.HUnit
+import Database.SQLite.Simple
 
 main :: IO ()
 main = runTestTT tests >>= (putStrLn . showCounts)
@@ -12,6 +13,7 @@ tests = TestList
   , TestLabel "namegener works in simple sitution" namegenerMatchesExp
   , TestLabel "namegener follows anagram" namegenerSameCharacters 
   , TestLabel "namegener supports words that have spaces in them" namegenerStringsSupportsSpaces
+  , TestLabel "Can load from database" testLoadNames
   ]
 
 mergeStringsTest = TestCase (assertEqual "Merge string produces all possible merges" expected given)
@@ -46,3 +48,19 @@ namegenerStringsSupportsSpaces = TestCase (assertEqual "Merge string support nam
         given = namegener "San Bo" "Det" $
           Switchs { matchString = Just "San Bo Det", random = False }
 
+testLoadNames = TestCase $ do
+  let firsts = ["Mark", "John", "Dink"] :: [String]
+  let lasts = fmap (\s -> s ++ "son") firsts
+  let expected = tupleApply fromList (firsts, lasts)
+  conn <- open ":memory"
+  execute conn "CREATE TABLE first_names (name text)" ()
+  execute conn "CREATE TABLE last_names (name text)" ()
+  executeMany conn "INSERT INTO first_names (name) VALUES (?)" $ fmap Only firsts
+  executeMany conn "INSERT INTO last_names (name) VALUES (?)" $ fmap Only lasts
+  calculated <- loadNames conn
+  let calculated' = tupleApply fromList calculated
+  close conn
+  assertEqual "Capable of reading first & last names from sqlite database" expected calculated'
+
+tupleApply :: (a -> b) -> (a, a) -> (b, b)
+tupleApply f (x, y) = (f x, f y)
