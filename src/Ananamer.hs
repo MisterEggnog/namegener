@@ -21,7 +21,12 @@ loadNames db = do
 data Switchs = Switchs {
     matchString :: Maybe String -- This should have a space in it, this is not checked
   , random :: Bool -- Shuffle the first/last name lists, currently does nothing
-}
+} deriving (Eq, Show)
+
+-- From args list, process the args.
+-- Rust has spoiled me with stuff like StructOpts
+processArgs :: [String] -> Switchs
+processArgs args = undefined
 
 -- First/Last names should be the file string, word splits will be added.
 -- If switch.matchString is Just, then the returned list will only be those that have the same characters as matchString.

@@ -14,6 +14,7 @@ tests = TestList
   , TestLabel "namegener follows anagram" namegenerSameCharacters 
   , TestLabel "namegener supports words that have spaces in them" namegenerStringsSupportsSpaces
   , TestLabel "Can load from database" testLoadNames
+  , buildArgsYes
   ]
 
 mergeStringsTest = TestCase (assertEqual "Merge string produces all possible merges" expected given)
@@ -64,3 +65,22 @@ testLoadNames = TestCase $ do
 
 tupleApply :: (a -> b) -> (a, a) -> (b, b)
 tupleApply f (x, y) = (f x, f y)
+
+buildArgsYes = TestCase $ do
+  -- This should probably use some kind of fuzzing to ensure it parses
+  -- accurately.
+  -- Also random will be added later
+  let noArgs = ["blem"]
+  let argsName = ["blem", "name"]
+  -- let argsRand = ["blem", "-r"]
+  -- let argsRandLong = ["blem", "--random"]
+  -- let argsRandName = ["blem", "-r", "name"]
+
+  let switchNoArgs = Switchs { matchString = Nothing, random = False }
+  let switchArgsName = Switchs { matchString = Just "name", random = False }
+  
+  let calculatedNoArgs = processArgs noArgs
+  let calculatedArgsName = processArgs argsName
+  assertEqual "Cannot handle no args" calculatedNoArgs switchNoArgs
+  assertEqual "Cannot handle only name" calculatedArgsName switchArgsName
+
