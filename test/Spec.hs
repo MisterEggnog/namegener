@@ -80,6 +80,8 @@ buildArgsYes = TestCase $ do
   let argsRandName = ["blem", "-r", "name"]
   let argsDashName = ["blem", "--", "-name"]
   let argsFail = ["blem", "--drops"]
+  let argsHelp = ["blem", "--help"]
+  let argsHelpShort = ["blem", "-h"]
 
   let switchNoArgs = Right defaultSwitch
   let switchArgsName = Right defaultSwitch{matchString = Just "name"}
@@ -87,6 +89,8 @@ buildArgsYes = TestCase $ do
   let switchArgsRandLong = switchArgsRand
   let switchArgsRandName = Right defaultSwitch{matchString = Just "name", random = True}
   let switchArgsDashName = Right defaultSwitch{matchString = Just "-name"}
+  let switchArgsHelp = Right defaultSwitch{help = True}
+  let switchArgsHelpShort = switchArgsHelp
   
   let calculatedNoArgs = processArgs noArgs
   let calculatedArgsName = processArgs argsName
@@ -95,6 +99,8 @@ buildArgsYes = TestCase $ do
   let calculatedArgsRandName = processArgs argsRandName
   let calculatedArgsDashName = processArgs argsDashName
   let calculatedArgsFail = processArgs argsFail
+  let calculatedArgsHelp = processArgs argsHelp
+  let calculatedArgsHelpShort = processArgs argsHelpShort
   assertEqual "Cannot handle no args" calculatedNoArgs switchNoArgs
   assertEqual "Cannot handle only name" calculatedArgsName switchArgsName
   assertEqual "Cannot handle only rand switch" switchArgsRand calculatedArgsRand
@@ -102,4 +108,6 @@ buildArgsYes = TestCase $ do
   assertEqual "Cannot handle rand switch & name" switchArgsRandName calculatedArgsRandName
   assertEqual "Cannot handle dash-dash dash-name" switchArgsDashName calculatedArgsDashName
   assertBool "Invalid switch did not fail" $ isLeft calculatedArgsFail
+  assertBool "Sets help flag if help switch is provided" $ help $ head $ rights [calculatedArgsHelp]
+  assertBool "Sets help flag if (short) help switch is provided" $ help $ head $ rights [calculatedArgsHelpShort]
 
