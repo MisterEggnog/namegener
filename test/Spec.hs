@@ -1,4 +1,5 @@
 
+import Data.Either
 import Data.Set (Set, fromList)
 import Ananamer
 import Test.HUnit
@@ -76,6 +77,7 @@ buildArgsYes = TestCase $ do
   let argsRandLong = ["blem", "--random"]
   let argsRandName = ["blem", "-r", "name"]
   let argsDashName = ["blem", "--", "-name"]
+  let argsFail = ["blem", "--drops"]
 
   let switchNoArgs = Right Switchs{matchString = Nothing, random = False}
   let switchArgsName = Right Switchs{matchString = Just "name", random = False}
@@ -90,10 +92,12 @@ buildArgsYes = TestCase $ do
   let calculatedArgsRandLong = processArgs argsRandLong
   let calculatedArgsRandName = processArgs argsRandName
   let calculatedArgsDashName = processArgs argsDashName
+  let calculatedArgsFail = processArgs argsFail
   assertEqual "Cannot handle no args" calculatedNoArgs switchNoArgs
   assertEqual "Cannot handle only name" calculatedArgsName switchArgsName
   assertEqual "Cannot handle only rand switch" switchArgsRand calculatedArgsRand
   assertEqual "Cannot handle only long rand switch" switchArgsRandLong calculatedArgsRandLong
   assertEqual "Cannot handle rand switch & name" switchArgsRandName calculatedArgsRandName
   assertEqual "Cannot handle dash-dash dash-name" switchArgsDashName calculatedArgsDashName
+  assertBool "Invalid switch did not fail" $ isLeft calculatedArgsFail
 
