@@ -24,9 +24,20 @@ data Switchs = Switchs {
 } deriving (Eq, Show)
 
 -- From args list, process the args.
--- Rust has spoiled me with stuff like StructOpts
-processArgs :: [String] -> Switchs
-processArgs args = undefined
+-- While I have looked into a commandline parser, the simple version was not
+-- working & seemed like a lot of work for something that needs two args at
+-- most.
+processArgs :: [String] -> Either String Switchs
+processArgs args = processArgs' (tail args) (Switchs{matchString = Nothing, random = False}) False
+  where processArgs' :: [String] -> Switchs -> Bool -> Either String Switchs
+        processArgs' [] s i = Right s
+        processArgs' (x:xs) s i
+          | not i && (x == "-r" || x == "--random")
+            = processArgs' xs (s{ random = True }) False
+          | (head x /= '-') || i
+            = processArgs' xs (s{ matchString = Just x}) i
+          | x == "--" = processArgs' xs s True
+          | otherwise = Left ("Uknown Switch: " ++ x)
 
 -- First/Last names should be the file string, word splits will be added.
 -- If switch.matchString is Just, then the returned list will only be those that have the same characters as matchString.
