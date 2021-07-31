@@ -25,7 +25,6 @@ dependencies:
 - random
 - random-shuffle
 - sort
-- split
 - sqlite-simple
 
 default-extensions:

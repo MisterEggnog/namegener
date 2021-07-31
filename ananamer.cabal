@@ -36,7 +36,6 @@ library
     , random
     , random-shuffle
     , sort
-    , split
     , sqlite-simple
   default-language: Haskell2010
 
@@ -55,7 +54,6 @@ executable ananamer-exe
     , random
     , random-shuffle
     , sort
-    , split
     , sqlite-simple
   default-language: Haskell2010
 
@@ -77,6 +75,5 @@ test-suite ananamer-test
     , random
     , random-shuffle
     , sort
-    , split
     , sqlite-simple
   default-language: Haskell2010

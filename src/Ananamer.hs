@@ -1,7 +1,6 @@
 module Ananamer where
 
 import Data.Sort
-import Data.List.Split
 import Database.SQLite.Simple
 
 main' :: Switchs -> IO ()
@@ -70,13 +69,6 @@ namegener fns lns sws =
     Nothing -> names
   where names   = mergeStrings fns lns
         prepS s = sort $ filter (/= ' ') s
-
-splitNameLists ::
-  Bool ->   -- If the returned string should be shuffled, current does nothing
-  String -> -- The unsplit string
-  [String]
-splitNameLists r s = splitString
-  where splitString = filter (/= "") $ splitOn "\n" s
 
 -- first names -> last names
 mergeStrings :: [String] -> [String] -> [String]

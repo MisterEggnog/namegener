@@ -10,7 +10,6 @@ main = runTestTT tests >>= (putStrLn . showCounts)
 
 tests = TestList
   [ TestLabel "mergeStrings" mergeStringsTest
-  , TestLabel "splitNames splits" splitNamesSplits
   , TestLabel "namegener works in simple sitution" namegenerMatchesExp
   , TestLabel "namegener follows anagram" namegenerSameCharacters 
   , TestLabel "namegener supports words that have spaces in them" namegenerStringsSupportsSpaces
@@ -22,11 +21,6 @@ mergeStringsTest = TestCase (assertEqual "Merge string produces all possible mer
   where expected = fromList ["Mark Markson", "Mark Johnson", "Mark Dinkson", "John Markson", "John Johnson", "John Dinkson", "Dink Markson", "Dink Johnson", "Dink Dinkson"]
         given = fromList $
           Ananamer.mergeStrings ["Mark", "John", "Dink"] ["Markson", "Johnson", "Dinkson"]
-
-splitNamesSplits = TestCase (assertEqual "splitNames splits according to newlines in string, no change in order" expected given)
-  where expected = ["john", "mark", "dink"]
-        given    = Ananamer.splitNameLists False "john\nmark\ndink\n"
-
 
 genericNamegener :: Switchs -> [String]
 genericNamegener s = namegener fs ls s
