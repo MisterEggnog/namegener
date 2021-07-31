@@ -30,8 +30,8 @@ splitNamesSplits = TestCase (assertEqual "splitNames splits according to newline
 
 genericNamegener :: Switchs -> [String]
 genericNamegener s = namegener fs ls s
-  where fs  = "John\nMark\nDink"
-        ls   = "Johnson\nMarkson\nDinkson"
+  where fs  = ["John", "Mark", "Dink"]
+        ls   = ["Johnson", "Markson", "Dinkson"]
 
 defaultSwitch :: Switchs
 defaultSwitch = Switchs{matchString = Nothing, random = False, help = False}
@@ -49,7 +49,7 @@ namegenerSameCharacters = TestCase (assertEqual "When given a name, namegener wi
 
 namegenerStringsSupportsSpaces = TestCase (assertEqual "Merge string support names with spaces" expected given)
   where expected = ["San Bo Det"]
-        given = namegener "San Bo" "Det" $
+        given = namegener ["San Bo"] ["Det"] $
           defaultSwitch{matchString = Just "San Bo Det"}
 
 testLoadNames = TestCase $ do

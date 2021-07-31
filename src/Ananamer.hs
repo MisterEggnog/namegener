@@ -56,17 +56,15 @@ helpStr = concat $ fmap (++"\n") [
 -- If switch.matchString is Just, then the returned list will only be those that have the same characters as matchString.
 -- This is technically the default behaviour
 namegener ::
-  String ->  -- First names
-  String ->  -- Last names
+  [String] ->  -- First names
+  [String] ->  -- Last names
   Switchs -> -- Command switchs
   [String]
 namegener fns lns sws =
   case matchString sws of
     Just s -> filter (\r -> prepS r == prepS s) names
     Nothing -> names
-  where lns'    = splitNameLists (random sws) lns
-        fns'    = splitNameLists (random sws) fns
-        names   = mergeStrings fns' lns'
+  where names   = mergeStrings fns lns
         prepS s = sort $ filter (/= ' ') s
 
 splitNameLists ::
