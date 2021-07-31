@@ -73,15 +73,15 @@ buildArgsYes = TestCase $ do
   -- This should probably use some kind of fuzzing to ensure it parses
   -- accurately.
   -- Also random will be added later
-  let noArgs = ["blem"]
-  let argsName = ["blem", "name"]
-  let argsRand = ["blem", "-r"]
-  let argsRandLong = ["blem", "--random"]
-  let argsRandName = ["blem", "-r", "name"]
-  let argsDashName = ["blem", "--", "-name"]
-  let argsFail = ["blem", "--drops"]
-  let argsHelp = ["blem", "--help"]
-  let argsHelpShort = ["blem", "-h"]
+  let noArgs = []
+  let argsName = ["name"]
+  let argsRand = ["-r"]
+  let argsRandLong = ["--random"]
+  let argsRandName = ["-r", "name"]
+  let argsDashName = ["--", "-name"]
+  let argsFail = ["--drops"]
+  let argsHelp = ["--help"]
+  let argsHelpShort = ["-h"]
 
   let switchNoArgs = Right defaultSwitch
   let switchArgsName = Right defaultSwitch{matchString = Just "name"}
