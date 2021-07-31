@@ -33,22 +33,24 @@ genericNamegener s = namegener fs ls s
   where fs  = "John\nMark\nDink"
         ls   = "Johnson\nMarkson\nDinkson"
 
+defaultSwitch :: Switchs
+defaultSwitch = Switchs{matchString = Nothing, random = False, help = False}
+
 namegenerMatchesExp = TestCase (assertEqual "toy namegener call produces hand calculated result" expected given)
   where expected = fromList ["Mark Markson", "Mark Johnson", "Mark Dinkson", "John Markson", "John Johnson", "John Dinkson", "Dink Markson", "Dink Johnson", "Dink Dinkson"]
         given =
             fromList
-          $ genericNamegener
-          $ Switchs { matchString = Nothing, random = False }
+          $ genericNamegener defaultSwitch
 
 namegenerSameCharacters = TestCase (assertEqual "When given a name, namegener will provide anagram" expected given)
   where expected = ["Dink Dinkson"]
         given    = genericNamegener $
-          Switchs { matchString = Just "Dink Dinkson", random = False }
+          defaultSwitch{matchString = Just "Dink Dinkson"}
 
 namegenerStringsSupportsSpaces = TestCase (assertEqual "Merge string support names with spaces" expected given)
   where expected = ["San Bo Det"]
         given = namegener "San Bo" "Det" $
-          Switchs { matchString = Just "San Bo Det", random = False }
+          defaultSwitch{matchString = Just "San Bo Det"}
 
 testLoadNames = TestCase $ do
   let firsts = ["Mark", "John", "Dink"] :: [String]
@@ -79,12 +81,12 @@ buildArgsYes = TestCase $ do
   let argsDashName = ["blem", "--", "-name"]
   let argsFail = ["blem", "--drops"]
 
-  let switchNoArgs = Right Switchs{matchString = Nothing, random = False}
-  let switchArgsName = Right Switchs{matchString = Just "name", random = False}
-  let switchArgsRand = Right Switchs{matchString = Nothing, random = True}
+  let switchNoArgs = Right defaultSwitch
+  let switchArgsName = Right defaultSwitch{matchString = Just "name"}
+  let switchArgsRand = Right defaultSwitch{random = True}
   let switchArgsRandLong = switchArgsRand
-  let switchArgsRandName = Right Switchs{matchString = Just "name", random = True}
-  let switchArgsDashName = Right Switchs{matchString = Just "-name", random = False}
+  let switchArgsRandName = Right defaultSwitch{matchString = Just "name", random = True}
+  let switchArgsDashName = Right defaultSwitch{matchString = Just "-name"}
   
   let calculatedNoArgs = processArgs noArgs
   let calculatedArgsName = processArgs argsName

@@ -21,6 +21,7 @@ loadNames db = do
 data Switchs = Switchs {
     matchString :: Maybe String -- This should have a space in it, this is not checked
   , random :: Bool -- Shuffle the first/last name lists, currently does nothing
+  , help :: Bool -- Print help string
 } deriving (Eq, Show)
 
 -- From args list, process the args.
@@ -28,10 +29,11 @@ data Switchs = Switchs {
 -- working & seemed like a lot of work for something that needs two args at
 -- most.
 processArgs :: [String] -> Either String Switchs
-processArgs args = processArgs' (tail args) (Switchs{matchString = Nothing, random = False}) False
+processArgs args = processArgs' (tail args) (Switchs{matchString = Nothing, random = False, help = False}) False
   where processArgs' :: [String] -> Switchs -> Bool -> Either String Switchs
         processArgs' [] s i = Right s
         processArgs' (x:xs) s i
+          | x == "--help" || x == "-h" = Right s{help = True}
           | not i && (x == "-r" || x == "--random")
             = processArgs' xs (s{ random = True }) False
           | (head x /= '-') || i
