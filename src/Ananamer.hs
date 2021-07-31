@@ -5,7 +5,11 @@ import Data.List.Split
 import Database.SQLite.Simple
 
 main' :: Switchs -> IO ()
-main' _ = putStrLn "dink"
+main' s = do
+  conn <- open "names.db"
+  (fns, lns) <- loadNames conn
+  mapM_ putStrLn $ namegener fns lns s
+  pure ()
 
 -- From the passed in database, read the names from the `first_name` &
 -- `last_name` tables.
