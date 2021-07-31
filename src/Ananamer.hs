@@ -41,6 +41,17 @@ processArgs args = processArgs' (tail args) (Switchs{matchString = Nothing, rand
           | x == "--" = processArgs' xs s True
           | otherwise = Left ("Uknown Switch: " ++ x)
 
+helpStr :: String
+helpStr = concat $ fmap (++"\n") [
+  "Usage: ananamer [FLAGS] [name]",
+  "Flags:",
+  "    -r/--random: Attempt to shuffle the names before merging. Results may",
+  "                 vary.",
+  "    -h/--help: Print help message\n",
+  "Args:",
+  "    name: Name that the output should be an anagram of.",
+  "Author: Baldwin, Josiah (2021)"]
+
 -- First/Last names should be the file string, word splits will be added.
 -- If switch.matchString is Just, then the returned list will only be those that have the same characters as matchString.
 -- This is technically the default behaviour
