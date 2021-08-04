@@ -15,8 +15,8 @@ main' s = do
 -- The tuple returned is (first names, last names).
 loadNames :: Connection -> IO ([String], [String])
 loadNames db = do
-  first_names <- query_ db "SELECT name FROM first_names;" :: IO [Only String]
-  last_names <- query_ db "SELECT name FROM last_names;" :: IO [Only String]
+  first_names <- query_ db "SELECT DISTINCT name FROM first_names;" :: IO [Only String]
+  last_names <- query_ db "SELECT DISTINCT name FROM last_names;" :: IO [Only String]
   let first_names' = map fromOnly first_names
   let last_names' = map fromOnly last_names
   pure (first_names', last_names')
