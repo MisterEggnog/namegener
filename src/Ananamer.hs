@@ -2,24 +2,35 @@ module Ananamer where
 
 import Data.Sort
 import Database.SQLite.Simple
+import Data.Text (pack)
 
 main' :: Switchs -> IO ()
 main' s = do
   conn <- open "names.db"
-  (fns, lns) <- loadNames conn
+  (fns, lns) <- loadNames conn (random s)
   mapM_ putStrLn $ namegener fns lns s
   pure ()
 
 -- From the passed in database, read the names from the `first_name` &
 -- `last_name` tables.
 -- The tuple returned is (first names, last names).
-loadNames :: Connection -> IO ([String], [String])
-loadNames db = do
-  first_names <- query_ db "SELECT DISTINCT name FROM first_names;" :: IO [Only String]
-  last_names <- query_ db "SELECT DISTINCT name FROM last_names;" :: IO [Only String]
+-- If the passed in Bool is True, than a query that attempts to randomize
+-- the output is used.
+loadNames :: Connection -> Bool -> IO ([String], [String])
+loadNames db r = do
+  first_names <- query_ db firstNameQuery :: IO [Only String]
+  last_names <- query_ db lastNameQuery :: IO [Only String]
   let first_names' = map fromOnly first_names
   let last_names' = map fromOnly last_names
   pure (first_names', last_names')
+  where firstNameQuery = nameQuery "first"
+        lastNameQuery = nameQuery "last"
+        nameQuery = \s -> Query $ pack $ if r then
+            randNameQuery s
+          else
+            staticNameQuery s
+        staticNameQuery = \s -> "SELECT DISTINCT name FROM " ++ s ++ "_names;"
+        randNameQuery = \s -> "SELECT name FROM " ++ s ++ "_names ORDER BY RANDOM();"
 
 data Switchs = Switchs {
     matchString :: Maybe String -- This should have a space in it, this is not checked

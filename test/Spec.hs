@@ -55,10 +55,14 @@ testLoadNames = TestCase $ do
   execute conn "CREATE TABLE last_names (name text)" ()
   executeMany conn "INSERT INTO first_names (name) VALUES (?)" $ fmap Only firsts
   executeMany conn "INSERT INTO last_names (name) VALUES (?)" $ fmap Only lasts
-  calculated <- loadNames conn
+  calculated <- loadNames conn False
   let calculated' = tupleApply fromList calculated
-  close conn
   assertEqual "Capable of reading first & last names from sqlite database" expected calculated'
+  -- Test for random version, should have the same result as non-random
+  calculatedRand <- loadNames conn True
+  let calculatedRand' = tupleApply fromList calculatedRand
+  assertEqual "Outputs same result with random flag" expected calculatedRand'
+  close conn
 
 tupleApply :: (a -> b) -> (a, a) -> (b, b)
 tupleApply f (x, y) = (f x, f y)

@@ -26,6 +26,7 @@ dependencies:
 - random-shuffle
 - sort
 - sqlite-simple
+- text
 
 default-extensions:
 - OverloadedStrings
