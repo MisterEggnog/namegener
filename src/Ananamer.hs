@@ -45,7 +45,7 @@ processArgs args = processArgs' args (Switchs{matchString = Nothing, random = Fa
           | otherwise = Left ("Uknown Switch: " ++ x)
 
 helpStr :: String
-helpStr = concat $ fmap (++"\n") [
+helpStr = unlines [
   "Usage: ananamer [FLAGS] [name]",
   "Flags:",
   "    -r/--random: Attempt to shuffle the names before merging. Results may",
