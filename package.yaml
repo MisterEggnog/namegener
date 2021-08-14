@@ -1,7 +1,7 @@
 name:                ananamer
 version:             0.1.0.0
 github:              "MisterEggnog/namegener"
-license:             OtherLicense
+license:             GPL-3.0-only
 author:              "Baldwin, Josiah"
 maintainer:          "12803156+MisterEggnog@users.noreply.github.com"
 copyright:           "2021 Baldwin, Josiah"

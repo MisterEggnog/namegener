@@ -1,4 +1,4 @@
-cabal-version: 1.12
+cabal-version: 2.2
 
 -- This file has been generated from package.yaml by hpack version 0.34.4.
 --
@@ -12,7 +12,8 @@ bug-reports:    https://github.com/MisterEggnog/namegener/issues
 author:         Baldwin, Josiah
 maintainer:     12803156+MisterEggnog@users.noreply.github.com
 copyright:      2021 Baldwin, Josiah
-license:        OtherLicense
+license:        GPL-3.0-only
+license-file:   LICENSE
 build-type:     Configure
 extra-source-files:
     README.md
