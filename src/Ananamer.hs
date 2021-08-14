@@ -79,7 +79,11 @@ helpStr = unlines [
   "    -h/--help: Print help message\n",
   "Args:",
   "    name: Name that the output should be an anagram of.",
-  "Author: Baldwin, Josiah (2021)"]
+  "",
+  "Copyright (C) 2021  Baldwin, Josiah",
+  "This program comes with ABSOLUTELY NO WARRANTY.",
+  "This is free software, and you are welcome to redistribute it under certain",
+  "conditions; see <https://www.gnu.org/licenses/> for more information."]
 
 -- First/Last names should be the file string, word splits will be added.
 -- If switch.matchString is Just, then the returned list will only be those that have the same characters as matchString.
